@@ -41,7 +41,7 @@ function handleEdit(event, info, i, label) {
 function createUI(data = datas, root = ul) {
     root.innerHTML = "";
     let fragment = new DocumentFragment();
-    data.forEach((card) => {
+    data.forEach((card, index) => {
         let li = document.createElement("li");
         let h4 = document.createElement("h4");
         h4.addEventListener('dblclick', (event) => handleEdit(event, card.title, index, 'title'));
