@@ -1,77 +1,72 @@
-document.addEventListener('DOMContentLoaded', (event) => {
+var btn = document.querySelector('.add');
+var remove = document.querySelector('.draggable');
 
-    function handleDragStart(e) {
-        this.style.opacity = '0.8';
+function dragStart(e) {
+  this.style.opacity = '0.4';
+  dragSrcEl = this;
+  e.dataTransfer.effectAllowed = 'move';
+  e.dataTransfer.setData('text/html', this.innerHTML);
+};
 
-        dragSrcEl = this;
-
-        e.dataTransfer.effectAllowed = 'move';
-        e.dataTransfer.setData('text/html', this.innerHTML);
-    }
-  
-    function handleDragEnd(e) {
-        this.style.opacity = '1';
-  
-        items.forEach(function (item) {
-            item.classList.remove('over');
-        });
-    }
-  
-    function handleDragOver(e) {
-        if (e.preventDefault) {
-            e.preventDefault();
-        }
-  
-        return false;
-    }
-  
-    function handleDragEnter(e) {
-        this.classList.add('over');
-    }
-  
-    function handleDragLeave(e) {
-        this.classList.remove('over');
-    }
-
-    function handleDrop(e) {
-        e.stopPropagation(); // stops the browser from redirecting.
-        if (dragSrcEl !== this) {
-            dragSrcEl.innerHTML = this.innerHTML;
-            this.innerHTML = e.dataTransfer.getData('text/html');
-        }
-        return false;
-    }
-   
-    let items = document.querySelectorAll('.container .item');
-    items.forEach(function(item) {
-        item.addEventListener('dragstart', handleDragStart);
-        item.addEventListener('dragover', handleDragOver);
-        item.addEventListener('dragenter', handleDragEnter);
-        item.addEventListener('dragleave', handleDragLeave);
-        item.addEventListener('dragend', handleDragEnd);
-        item.addEventListener('drop', handleDrop);
-    });
-});
-
-//<div draggable="true" class="item">Item 5<span>Drag Me</span></div>
-
-let input = document.querySelector("input");
-let root = document.querySelector(".container");
-
-input.addEventListener('keyup', (event) => {
-    if(e.keyCode === 13) {
-        let data = event.target.value;
-        createUI(data);
-    }
-});
-
-function createUI(data) {
-    root.innerHTML = "";
-    let div = document.createElement('div');
-    div.draggable = "true";
-    div.classList.add = "item";
-    div.innerText = data;
-    let span = document.createElement("span");
-    div.append(span);
-    root.append(div);
+function dragEnter(e) {
+  this.classList.add('over');
 }
+
+function dragLeave(e) {
+  e.stopPropagation();
+  this.classList.remove('over');
+}
+
+function dragOver(e) {
+  e.preventDefault();
+  e.dataTransfer.dropEffect = 'move';
+  return false;
+}
+
+function dragDrop(e) {
+  if (dragSrcEl != this) {
+    dragSrcEl.innerHTML = this.innerHTML;
+    this.innerHTML = e.dataTransfer.getData('text/html');
+  }
+  return false;
+}
+
+function dragEnd(e) {
+  var listItens = document.querySelectorAll('.draggable');
+  [].forEach.call(listItens, function(item) {
+    item.classList.remove('over');
+  });
+  this.style.opacity = '1';
+}
+
+function addEventsDragAndDrop(el) {
+  el.addEventListener('dragstart', dragStart, false);
+  el.addEventListener('dragenter', dragEnter, false);
+  el.addEventListener('dragover', dragOver, false);
+  el.addEventListener('dragleave', dragLeave, false);
+  el.addEventListener('drop', dragDrop, false);
+  el.addEventListener('dragend', dragEnd, false);
+}
+
+var listItens = document.querySelectorAll('.draggable');
+[].forEach.call(listItens, function(item) {
+  addEventsDragAndDrop(item);
+});
+
+function addNewItem() {
+  var newItem = document.querySelector('.input').value;
+  if (newItem != '') {
+    document.querySelector('.input').value = '';
+    var li = document.createElement('li');
+    var attr = document.createAttribute('draggable');
+    var ul = document.querySelector('ul');
+    li.className = 'draggable';
+    attr.value = 'true';
+    li.setAttributeNode(attr);
+    li.appendChild(document.createTextNode(newItem));
+    ul.appendChild(li);
+    addEventsDragAndDrop(li);
+  }
+}
+
+btn.addEventListener('click', addNewItem);
