@@ -2,6 +2,7 @@
    v2.0 | 20110126
    License: none (public domain)
 */
+@import url("https://fonts.googleapis.com/css?family=Raleway:300,800");
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -53,62 +54,113 @@ table {
 }
 
 body {
-  background-color: royalblue;
-  text-align: center;
-  color: white;
+  background-color: #0072ff;
 }
 
 body h1 {
-  font-size: 46px;
-  text-transform: uppercase;
-  padding: 2rem;
-}
-
-body input {
-  border: 1px solid white;
-  padding: 0.8rem;
-  background-color: royalblue;
-  width: 300px;
+  margin-top: 1rem;
+  text-align: center;
+  font-family: "Raleway", sans-serif;
   color: white;
-  font-weight: 600;
-  font-size: 12px;
+  font-size: 50px;
+  font-weight: normal;
 }
 
-body .container {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+body .adder {
+  position: relative;
+  width: 250px;
+  margin: 5px auto;
+  display: block;
 }
 
-body .item {
+body .adder ::-webkit-input-placeholder {
+  color: #cecece;
+}
+
+body .adder .input {
+  outline: none;
+  border: 1px solid white;
+  background-color: #0072ff;
+  color: white;
+  height: 50px;
+  width: 250px;
+  padding-left: 10px;
+  font-family: "Raleway", sans-serif;
+  font-weight: 800;
+  font-size: 16px;
+  margin-left: -5px;
+}
+
+body .adder span {
+  position: absolute;
+  right: 0;
+  top: 0;
+  font-size: 30px;
+  font-weight: 800;
+  line-height: 1.8;
+  cursor: pointer;
+  -webkit-transition: all 200ms;
+  transition: all 200ms;
+  color: white;
+  will-change: transform;
+}
+
+body .adder span:hover {
+  -webkit-transform: rotate(180deg);
+          transform: rotate(180deg);
+}
+
+body ul {
+  padding: 0px;
+}
+
+body ul .draggable {
+  will-change: transform;
+  font-family: "Raleway", sans-serif;
+  font-weight: 800;
+  height: 50px;
+  list-style-type: none;
+  margin: 10px;
   background-color: white;
-  padding: 0.8rem;
-  margin: 0.5rem;
-  color: royalblue;
-  font-weight: 600;
-  width: 300px;
+  color: #0072ff;
+  width: 250px;
+  line-height: 3.2;
+  padding-left: 10px;
   cursor: move;
-  text-align: left;
+  -webkit-transition: all 200ms;
+  transition: all 200ms;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  margin: 10px auto;
+  position: relative;
 }
 
-body .item span {
-  visibility: hidden;
-  font-size: 0.6rem;
-  float: right;
+body ul .draggable:after {
+  content: 'drag me';
+  right: 7px;
+  font-size: 10px;
+  position: absolute;
+  cursor: pointer;
+  line-height: 5;
+  -webkit-transition: all 200ms;
+  transition: all 200ms;
+  -webkit-transition-timing-function: cubic-bezier(0.48, 0.72, 0.62, 1.5);
+          transition-timing-function: cubic-bezier(0.48, 0.72, 0.62, 1.5);
+  -webkit-transform: translateX(120%);
+          transform: translateX(120%);
+  opacity: 0;
 }
 
-body .item:hover span {
-  visibility: visible;
+body ul .draggable:hover:after {
+  opacity: 1;
+  -webkit-transform: translate(0);
+          transform: translate(0);
 }
 
-body .item.over {
-  width: 330px;
+.over {
+  -webkit-transform: scale(1.1, 1.1);
+          transform: scale(1.1, 1.1);
 }
 /*# sourceMappingURL=style.css.map */
