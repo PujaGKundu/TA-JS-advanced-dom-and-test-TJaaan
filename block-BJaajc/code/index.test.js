@@ -5,28 +5,40 @@ const {
   getArea,
 } = require("./index.js");
 
-const myMock = jest.fn();
-
-getFullName(("Arya", "Stark"), myMock);
-
-isPalindrome("racecar", myMock);
-
-getCircumference(3, myMock);
-
-getArea(10, myMock);
-
 test("'Arya' and 'Stark' to equal Arya Stark", () => {
   expect(getFullName("Arya", "Stark")).toBe("Arya Stark");
+});
+
+test("'Arya' and 'Stark' to not equal John Snow", () => {
+  expect(getFullName("Arya", "Stark")).not.toBe("John Snow");
 });
 
 test("'racecar' to equal true", () => {
   expect(isPalindrome("racecar")).toBe(true);
 });
 
+test("'demo' to equal false", () => {
+  expect(isPalindrome("demo")).toBe(false);
+});
+
+test("'racecar' to not equal false", () => {
+  expect(isPalindrome("racecar")).not.toBe(false);
+});
+
 test("3 to equal 'The circumference is 18.857142857142858'", () => {
   expect(getCircumference(3)).toBe("The circumference is 18.857142857142858");
 });
 
+test("8 to not equal 'The circumference is 18.857142857142858'", () => {
+  expect(getCircumference(8)).not.toBe(
+    "The circumference is 18.857142857142858"
+  );
+});
+
 test("10 to equal 'The area is 314.2857142857143'", () => {
   expect(getArea(10)).toBe("The area is 314.2857142857143");
+});
+
+test("5 to not equal 'The area is 314.2857142857143'", () => {
+  expect(getArea(5)).not.toBe("The area is 314.2857142857143");
 });
