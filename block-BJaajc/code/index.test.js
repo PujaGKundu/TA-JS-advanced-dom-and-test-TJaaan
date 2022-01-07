@@ -40,5 +40,5 @@ test("10 to equal 'The area is 314.2857142857143'", () => {
 });
 
 test("5 to not equal 'The area is 314.2857142857143'", () => {
-  expect(getArea(5)).not.toBe("The area is 314.2857142857143");
+  expect(getArea(5)).not.toBe("314.2857142857143");
 });
