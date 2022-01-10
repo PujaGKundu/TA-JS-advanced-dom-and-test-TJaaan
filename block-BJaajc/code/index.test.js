@@ -89,6 +89,22 @@ test("10 to equal 'The area is 314.2857142857143'", () => {
   expect(getArea(10)).toBe("The area is 314.2857142857143");
 });
 
+test("5 to equal 'The area is 78.57142857142857'", () => {
+  expect(getArea(5)).toBe("The area is 78.57142857142857");
+});
+
+test("20 to equal 'The area is 1257.142857142857'", () => {
+  expect(getArea(20)).toBe("The area is 1257.142857142857");
+});
+
 test("5 to not equal 'The area is 314.2857142857143'", () => {
   expect(getArea(5)).not.toBe("314.2857142857143");
+});
+
+test("5 to not equal 'The area is 314.2857142857143'", () => {
+  expect(getArea(5)).not.toBe("The area is 314.2857142857143");
+});
+
+test("18 to not equal 'The area is 1,018'", () => {
+  expect(getArea(18)).not.toBe("The area is 1,018");
 });
